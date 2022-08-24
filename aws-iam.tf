@@ -5,9 +5,8 @@ resource "aws_iam_role" "glue_role" {
     Version = "2012-10-17"
     Statement = [
       {
-        Action = "sts:AssumeRole"
         Effect = "Allow"
-        Sid    = "glue"
+        Action = "sts:AssumeRole"
         Principal = {
           Service = "glue.amazonaws.com"
         }
@@ -16,18 +15,18 @@ resource "aws_iam_role" "glue_role" {
   })
 
   inline_policy {
-    name = "terraform-inline-policy"
+    name   = "terraform-inline-policy"
     policy = data.aws_iam_policy_document.inline_policy.json
   }
 }
 
 data "aws_iam_policy_document" "inline_policy" {
   statement {
+    effect = "Allow"
     actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents",
-      "logs:AssociateKmsKey"
+      "logs:PutLogEvents"
     ]
     resources = [
       "arn:aws:logs:*:*:/aws-glue/*"
@@ -35,6 +34,7 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
+    effect = "Allow"
     actions = [
       "s3:List*",
       "s3:Get*"
@@ -46,6 +46,7 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
+    effect = "Allow"
     actions = [
       "dynamodb:Query",
       "dynamodb:Scan",
@@ -57,6 +58,7 @@ data "aws_iam_policy_document" "inline_policy" {
   }
 
   statement {
+    effect = "Allow"
     actions = [
       "sqs:SendMessage"
     ]

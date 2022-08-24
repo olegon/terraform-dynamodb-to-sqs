@@ -10,7 +10,7 @@ module "aws_s3_bucket_glue_scripts" {
   force_destroy = true
 }
 
-resource "aws_s3_bucket_object" "glue_script" {
+resource "aws_s3_bucket_object" "from_dynamo_to_sqs_glue_script" {
   bucket = module.aws_s3_bucket_glue_scripts.s3_bucket_id
   key    = "glue-script.py"
   source = "./glue-scripts/glue-script.py"
