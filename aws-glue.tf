@@ -1,5 +1,5 @@
 resource "aws_glue_job" "from_dynamo_to_sqs_job" {
-  name     = "from-dynamodb-to-sqs-poc"
+  name     = "from-dynamodb-to-sqs-job"
   role_arn = aws_iam_role.glue_role.arn
   glue_version = "3.0"
 
